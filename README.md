@@ -1,5 +1,5 @@
 # Real Estate Costs in New York City
-Authors: Erick Sanmartin, Peter Morris, Anothony Rondos, Nate Williamson
+Authors: Erick Sanmartin, Peter Morris, Anthony Rondos, Nate Williamson
 
 # Project Management Plan
 [Project Management Plan](https://trello.com/b/XTmwE8s1/pmp-agile)
