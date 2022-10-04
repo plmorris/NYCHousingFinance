@@ -14,8 +14,6 @@ import pymssql
 from urllib.request import urlopen
 import json
 import numpy as np
-#import matplotlib.pyplot as plt
-#import seaborn as sns
 import plotly.graph_objects as go
 import pickle
 from sklearn.model_selection import train_test_split
@@ -1254,8 +1252,8 @@ submenu_1 = [
     # we use the Collapse component to hide and reveal the navigation links
     dbc.Collapse(
         [
-            dbc.NavLink("Page 1.1: Prices and Events", href="/page-1/1"),
-            dbc.NavLink("Page 1.2: Price over time", href="/page-1/2")
+            dbc.NavLink("Prices and Events", href="/page-1/1"),
+            dbc.NavLink("Price over time", href="/page-1/2")
         ],
         id="submenu-1-collapse",
     ),
@@ -1278,7 +1276,7 @@ submenu_2 = [
     ),
     dbc.Collapse(
         [
-            dbc.NavLink("Page 2.1: Affordability Across NYC", href="/page-2/1")
+            dbc.NavLink("Affordability Across NYC", href="/page-2/1")
         ],
         id="submenu-2-collapse",
     ),
@@ -1301,10 +1299,10 @@ submenu_3 = [
     ),
     dbc.Collapse(
         [
-            dbc.NavLink("Page 3.1: Top 3 Neighborhoods", href="/page-3/1"),
-            dbc.NavLink("Page 3.2: Most/Least Expensive Neighborhoods", href="/page-3/2"),
-            dbc.NavLink("Page 3.3: Pandemic Price Shifts", href="/page-3/3"),
-            dbc.NavLink("Page 3.4: Renting vs. Owning", href="/page-3/4")
+            dbc.NavLink("Top 3 Neighborhoods", href="/page-3/1"),
+            dbc.NavLink("Most/Least Expensive Neighborhoods", href="/page-3/2"),
+            dbc.NavLink("Pandemic Price Shifts", href="/page-3/3"),
+            dbc.NavLink("Renting vs. Owning", href="/page-3/4")
         ],
         id="submenu-3-collapse",
     ),
@@ -1327,8 +1325,8 @@ submenu_4 = [
     ),
     dbc.Collapse(
         [
-            dbc.NavLink("Page 4.1: Random Forest Model", href="/page-4/1"),
-            dbc.NavLink("Page 4.2: Predict a Price", href="/page-4/2")
+            dbc.NavLink("Random Forest Model", href="/page-4/1"),
+            dbc.NavLink("Predict a Price", href="/page-4/2")
         ],
         id="submenu-4-collapse",
     ),
