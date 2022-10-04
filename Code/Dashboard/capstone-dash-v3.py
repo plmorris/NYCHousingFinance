@@ -229,8 +229,7 @@ qn_top.rename(columns={"neighborhood": "Neighborhood"}, inplace=True)
 
 # manhattan top 3 and bottom 3 neighborhoods
 fig_top_mny_rent = px.line(mny_top, x="Month/Year", y="Studio/One-Bed Median Rent", color="Neighborhood",
-    title="Top 3 and Bottom 3 Manhattan Neighborhoods for Rate of Rent Increase 2010-2022",
-    markers=True)
+    title="Top 3 and Bottom 3 Manhattan Neighborhoods for Rate of Rent Increase 2010-2022")
 fig_top_mny_rent.update_traces(opacity=0.4)
 fig_top_mny_rent.update_layout(yaxis_title='Studio/One-Bed Median Rent ($USD)')
 fig_top_mny_rent.update_traces(textposition="bottom right")
@@ -249,7 +248,7 @@ fig_top_mny_rent.add_trace(go.Scatter(x=['2010-01-01','2022-08-01'],
 fig_top_mny_rent.add_trace(go.Scatter(x=['2010-01-01','2022-08-01'],
     y=[mny_top[(mny_top['Neighborhood']=='Midtown South') & (mny_top['Month/Year']=='2010-01-01')]['Studio/One-Bed Median Rent'].values[0],
         mny_top[(mny_top['Neighborhood']=='Midtown South') & (mny_top['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
-    mode='lines', name='MtS Net Δ', line=dict(color='#e377c2')))
+    mode='lines', name='MtS Net Δ', line=dict(color='#ab63fa')))
 fig_top_mny_rent.add_trace(go.Scatter(x=['2010-01-01','2022-08-01'],
     y=[mny_top[(mny_top['Neighborhood']=='Soho') & (mny_top['Month/Year']=='2010-01-01')]['Studio/One-Bed Median Rent'].values[0],
         mny_top[(mny_top['Neighborhood']=='Soho') & (mny_top['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
@@ -258,11 +257,21 @@ fig_top_mny_rent.add_trace(go.Scatter(x=['2010-01-01','2022-08-01'],
     y=[mny_top[(mny_top['Neighborhood']=='Washington Heights') & (mny_top['Month/Year']=='2010-01-01')]['Studio/One-Bed Median Rent'].values[0],
         mny_top[(mny_top['Neighborhood']=='Washington Heights') & (mny_top['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
     mode='lines', name='WH Net Δ', line=dict(color='#17becf')))
-
+fig_top_mny_rent.update_layout({
+    'plot_bgcolor': 'rgba(255,255,255,1)',
+    'paper_bgcolor': 'rgba(255,255,255,1)'}
+)
+fig_top_mny_rent.update_xaxes(showline=True, linewidth=2, linecolor='black',
+                    showgrid=True, gridcolor='lightgray', zeroline=True,
+                    zerolinecolor='lightgray', zerolinewidth=1
+)
+fig_top_mny_rent.update_yaxes(showline=True, linewidth=2, linecolor='black',
+                     showgrid=True, gridcolor='lightgray', zeroline=True,
+                    zerolinecolor='lightgray', zerolinewidth=1
+)
 # bronx
 fig_top_bx_rent = px.line(bx_top, x="Month/Year", y="Studio/One-Bed Median Rent", color="Neighborhood",
-    title="Top 2 and Bottom 2 Bronx Neighborhoods for Rate of Rent Increase 2010(12)(13)(14)-2022",
-    markers=True)
+    title="Top 2 and Bottom 2 Bronx Neighborhoods for Rate of Rent Increase 2010(12)(13)(14)-2022")
 fig_top_bx_rent.update_traces(opacity=0.4)
 fig_top_bx_rent.update_layout(yaxis_title='Studio/One-Bed Median Rent ($USD)')
 fig_top_bx_rent.update_traces(textposition="bottom right")
@@ -281,12 +290,22 @@ fig_top_bx_rent.add_trace(go.Scatter(x=['2010-01-01','2022-08-01'],
 fig_top_bx_rent.add_trace(go.Scatter(x=['2013-03-01','2022-08-01'],
     y=[bx_top[(bx_top['Neighborhood']=='University Heights') & (bx_top['Month/Year']=='2013-03-01')]['Studio/One-Bed Median Rent'].values[0],
         bx_top[(bx_top['Neighborhood']=='University Heights') & (bx_top['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
-    mode='lines', name='UH Net Δ', line=dict(color='#e377c2')))
-
+    mode='lines', name='UH Net Δ', line=dict(color='#ab63fa')))
+fig_top_bx_rent.update_layout({
+    'plot_bgcolor': 'rgba(255,255,255,1)',
+    'paper_bgcolor': 'rgba(255,255,255,1)'}
+)
+fig_top_bx_rent.update_xaxes(showline=True, linewidth=2, linecolor='black',
+                    showgrid=True, gridcolor='lightgray', zeroline=True,
+                    zerolinecolor='lightgray', zerolinewidth=1
+)
+fig_top_bx_rent.update_yaxes(showline=True, linewidth=2, linecolor='black',
+                     showgrid=True, gridcolor='lightgray', zeroline=True,
+                    zerolinecolor='lightgray', zerolinewidth=1
+)
 # brooklyn
 fig_top_bkl_rent = px.line(bkl_top, x="Month/Year", y="Studio/One-Bed Median Rent", color="Neighborhood",
-    title="Top 3 and Bottom 3 Brooklyn Neighborhoods for Rate of Rent Increase 2010(11)-2022",
-    markers=True)
+    title="Top 3 and Bottom 3 Brooklyn Neighborhoods for Rate of Rent Increase 2010(11)-2022")
 fig_top_bkl_rent.update_traces(opacity=0.4)
 fig_top_bkl_rent.update_traces(textposition="bottom right")
 fig_top_bkl_rent.update_layout(yaxis_title='Studio/One-Bed Median Rent ($USD)')
@@ -305,7 +324,7 @@ fig_top_bkl_rent.add_trace(go.Scatter(x=['2010-01-01','2022-08-01'],
 fig_top_bkl_rent.add_trace(go.Scatter(x=['2011-02-01','2022-08-01'],
     y=[bkl_top[(bkl_top['Neighborhood']=='Midwood') & (bkl_top['Month/Year']=='2011-02-01')]['Studio/One-Bed Median Rent'].values[0],
         bkl_top[(bkl_top['Neighborhood']=='Midwood') & (bkl_top['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
-    mode='lines', name='MW Net Δ', line=dict(color='#e377c2')))
+    mode='lines', name='Mw Net Δ', line=dict(color='#ab63fa')))
 fig_top_bkl_rent.add_trace(go.Scatter(x=['2010-01-01','2022-08-01'],
     y=[bkl_top[(bkl_top['Neighborhood']=='Prospect Heights') & (bkl_top['Month/Year']=='2010-01-01')]['Studio/One-Bed Median Rent'].values[0],
         bkl_top[(bkl_top['Neighborhood']=='Prospect Heights') & (bkl_top['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
@@ -314,12 +333,22 @@ fig_top_bkl_rent.add_trace(go.Scatter(x=['2010-02-01','2022-08-01'],
     y=[bkl_top[(bkl_top['Neighborhood']=='Sheepshead Bay') & (bkl_top['Month/Year']=='2010-02-01')]['Studio/One-Bed Median Rent'].values[0],
         bkl_top[(bkl_top['Neighborhood']=='Sheepshead Bay') & (bkl_top['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
     mode='lines', name='ShB Net Δ', line=dict(color='#17becf')))
-
+fig_top_bkl_rent.update_layout({
+    'plot_bgcolor': 'rgba(255,255,255,1)',
+    'paper_bgcolor': 'rgba(255,255,255,1)'}
+)
+fig_top_bkl_rent.update_xaxes(showline=True, linewidth=2, linecolor='black',
+                    showgrid=True, gridcolor='lightgray', zeroline=True,
+                    zerolinecolor='lightgray', zerolinewidth=1
+)
+fig_top_bkl_rent.update_yaxes(showline=True, linewidth=2, linecolor='black',
+                     showgrid=True, gridcolor='lightgray', zeroline=True,
+                    zerolinecolor='lightgray', zerolinewidth=1
+)
 
 #queens
 fig_top_qn_rent = px.line(qn_top, x="Month/Year", y="Studio/One-Bed Median Rent", color="Neighborhood",
-    title="Top 3 and Bottom 3 Queens Neighborhoods for Rate of Rent Increase 2010(12)-2022",
-    markers=True)
+    title="Top 3 and Bottom 3 Queens Neighborhoods for Rate of Rent Increase 2010(12)-2022")
 fig_top_qn_rent.update_traces(opacity=0.4)
 fig_top_qn_rent.update_traces(textposition="bottom right")
 fig_top_qn_rent.update_layout(yaxis_title='Studio/One-Bed Median Rent ($USD)')
@@ -338,7 +367,7 @@ fig_top_qn_rent.add_trace(go.Scatter(x=['2012-10-01','2022-08-01'],
 fig_top_qn_rent.add_trace(go.Scatter(x=['2010-01-01','2022-08-01'],
     y=[qn_top[(qn_top['Neighborhood']=='Forest Hills') & (qn_top['Month/Year']=='2010-01-01')]['Studio/One-Bed Median Rent'].values[0],
         qn_top[(qn_top['Neighborhood']=='Forest Hills') & (qn_top['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
-    mode='lines', name='FH Net Δ', line=dict(color='#e377c2')))
+    mode='lines', name='FH Net Δ', line=dict(color='#ab63fa')))
 fig_top_qn_rent.add_trace(go.Scatter(x=['2010-01-01','2022-08-01'],
     y=[qn_top[(qn_top['Neighborhood']=='Long Island City') & (qn_top['Month/Year']=='2010-01-01')]['Studio/One-Bed Median Rent'].values[0],
         qn_top[(qn_top['Neighborhood']=='Long Island City') & (qn_top['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
@@ -347,7 +376,18 @@ fig_top_qn_rent.add_trace(go.Scatter(x=['2010-01-01','2022-08-01'],
     y=[qn_top[(qn_top['Neighborhood']=='Rego Park') & (qn_top['Month/Year']=='2010-01-01')]['Studio/One-Bed Median Rent'].values[0],
         qn_top[(qn_top['Neighborhood']=='Rego Park') & (qn_top['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
     mode='lines', name='RP Net Δ', line=dict(color='#17becf')))
-
+fig_top_qn_rent.update_layout({
+    'plot_bgcolor': 'rgba(255,255,255,1)',
+    'paper_bgcolor': 'rgba(255,255,255,1)'}
+)
+fig_top_qn_rent.update_xaxes(showline=True, linewidth=2, linecolor='black',
+                    showgrid=True, gridcolor='lightgray', zeroline=True,
+                    zerolinecolor='lightgray', zerolinewidth=1
+)
+fig_top_qn_rent.update_yaxes(showline=True, linewidth=2, linecolor='black',
+                     showgrid=True, gridcolor='lightgray', zeroline=True,
+                    zerolinecolor='lightgray', zerolinewidth=1
+)
 
 def create_top_hood_graph(borough):
     boro_dict = {
