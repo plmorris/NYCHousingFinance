@@ -1461,7 +1461,7 @@ def render_page_content(pathname):
         ])
     elif pathname == "/page-3/2":
         return dbc.Container([
-            html.H1("Rent costs breakdown by Borough"),
+            html.H1("Cost breakdown by Borough"),
             html.P([
                 dcc.Dropdown(
                     ['Condos','Studio/One Bedroom'],
