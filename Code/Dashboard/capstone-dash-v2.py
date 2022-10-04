@@ -1055,7 +1055,7 @@ def create_rent_own(borough):
 
 
 ### Machine Learning Model
-with open('random_forest.pickle', 'rb') as f:
+with open('random_forest_model.pickle', 'rb') as f:
     rf = pickle.load(f)
 
 
