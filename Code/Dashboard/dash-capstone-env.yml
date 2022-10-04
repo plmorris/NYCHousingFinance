@@ -1,0 +1,14 @@
+name: dash-capstone
+dependencies:
+  - pandas
+  - numpy
+  - matplotlib
+  - seaborn
+  - plotly
+  - dash
+  - pymssql
+  - ipykernel
+  - nbformat>=4.2.0
+  - scikit-learn
+  - dash-bootstrap-components
+
