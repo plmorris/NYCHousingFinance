@@ -21,10 +21,10 @@ import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 
-database = "group-6-finance"
-user = "ericks"
-password  = "MYP4SSW0RD!"
-server = "gen10-data-fundamentals-22-07-sql-server.database.windows.net"
+from config import database
+from config import user
+from config import password
+from config import server
 
 cnxn = pymssql.connect(server, user, password, database)
 cursor = cnxn.cursor()
