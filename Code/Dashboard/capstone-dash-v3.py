@@ -1498,7 +1498,7 @@ def render_page_content(pathname):
             html.P([
                 dcc.Dropdown(
                     ['Manhattan','Bronx','Brooklyn','Queens'],
-                    'Manhattan',
+                    'Queens',
                     id='top_three_hoods'
                 )
             ]),
@@ -1557,7 +1557,7 @@ def render_page_content(pathname):
             html.P('Please Select a Borough'), 
             dcc.Dropdown(
                 ['Manhattan','Bronx','Brooklyn','Queens','Staten Island'],
-                'Manhattan',
+                'Brooklyn',
                 id='borough_thresh'
             ),
             dcc.Graph(id='borough_thresh_output')
@@ -1567,9 +1567,12 @@ def render_page_content(pathname):
     elif pathname == "/page-4/1":
         return dbc.Container([
             html.H1("Machine Learning: Predicting pricing trends"),
-            html.P("""Our model uses property sales data from the past year (September 2021 - August 2022) in New York City. 
-                    The data has numeric and categorical features describing a property's physical characteristics, location, building classifications and price. 
-                    Our model predicts the price of residential properties based on these features."""),
+            html.P(),
+            html.Ul(id = "machine learn list", children = [html.Li("""Our model uses residential property sales data from the past year (September 2021 - August 2022) in 
+                    New York City to predict property prices."""), html.Li("""The data has numeric and categorical features describing a 
+                    property's physical characteristics, location, building classifications and price."""), 
+                    html.Li("""Random forest was the best performing model with a test score = 0.71, test RMSE = 1,102,305 and test MAE = 361,767""")]),
+                   
             html.P(
                 dcc.Graph(figure = sales_hist)
             ),
@@ -1781,42 +1784,42 @@ def update_ML_output(n_clicks,
     
     return f'The predicted price is ${formatted_price}.'
 
-@app.callback(Output('historical_events', 'figure'),
-              Input('interval-component', 'n_intervals'))
-def UpdateData(n):
-    query_own = f'SELECT * FROM OwnPrice'
-    df_update = pd.read_sql(query_own, cnxn)
+# @app.callback(Output('historical_events', 'figure'),
+#               Input('interval-component', 'n_intervals'))
+# def UpdateData(n):
+#     query_own = f'SELECT * FROM OwnPrice'
+#     df_update = pd.read_sql(query_own, cnxn)
 
-    df_update['Date'] = pd.to_datetime(df_update[['year','month']].assign(DAY=1))
-    monthly_df = df_update[['Date','sfrMedianPrice','condoMedianPrice','coopMedianPrice']]
-    line_df = monthly_df.groupby('Date').agg('mean').rename(columns = {'sfrMedianPrice' : 'Single Family Residence', 
-                                                                        'condoMedianPrice' : 'Condos',
-                                                                        'coopMedianPrice' : 'Coops'})
+#     df_update['Date'] = pd.to_datetime(df_update[['year','month']].assign(DAY=1))
+#     monthly_df = df_update[['Date','sfrMedianPrice','condoMedianPrice','coopMedianPrice']]
+#     line_df = monthly_df.groupby('Date').agg('mean').rename(columns = {'sfrMedianPrice' : 'Single Family Residence', 
+#                                                                         'condoMedianPrice' : 'Condos',
+#                                                                         'coopMedianPrice' : 'Coops'})
 
-    fig_events = px.line(line_df,
-           x = line_df.index,
-           y = line_df.columns)
+#     fig_events = px.line(line_df,
+#            x = line_df.index,
+#            y = line_df.columns)
 
-    fig_events.update_layout(
-            title = 'NYC Residential Property Average Median Prices 2010-2022',
-            xaxis_title = 'Date',
-            yaxis_title = 'Average Median Price',
-            legend_title = 'Legend')
+#     fig_events.update_layout(
+#             title = 'NYC Residential Property Average Median Prices 2010-2022',
+#             xaxis_title = 'Date',
+#             yaxis_title = 'Average Median Price',
+#             legend_title = 'Legend')
 
-    fig_events.add_vrect(x0="2020-03-22", x1="2020-03-28", 
-                  annotation_text="NYC Pause Program begins", annotation_position="top left",
-                  fillcolor="black", opacity=0.9, line_width=5)
+#     fig_events.add_vrect(x0="2020-03-22", x1="2020-03-28", 
+#                   annotation_text="NYC Pause Program begins", annotation_position="top left",
+#                   fillcolor="black", opacity=0.9, line_width=5)
 
-    fig_events.add_vrect(x0="2010-07-21",x1="2010-07-21", annotation_text="Dodd-Frank Act Passes", annotation_position="top left",
-                  fillcolor="black", opacity=0.9, line_width=5)
+#     fig_events.add_vrect(x0="2010-07-21",x1="2010-07-21", annotation_text="Dodd-Frank Act Passes", annotation_position="top left",
+#                   fillcolor="black", opacity=0.9, line_width=5)
 
-    fig_events.add_vrect(x0="2019-06-14",x1="2019-06-14", annotation_text=f"Housing Stability &<br> Tenant Protection Act", annotation_position="top right",
-                  fillcolor="black", opacity=0.9, line_width=5)
+#     fig_events.add_vrect(x0="2019-06-14",x1="2019-06-14", annotation_text=f"Housing Stability &<br> Tenant Protection Act", annotation_position="top right",
+#                   fillcolor="black", opacity=0.9, line_width=5)
 
-    fig_events.add_vrect(x0="2016-03-22",x1="2016-03-22", annotation_text=f"Zoning for Quality &<br> and Affordability Initiative", annotation_position="top right",
-                  fillcolor="black", opacity=0.9, line_width=5)
+#     fig_events.add_vrect(x0="2016-03-22",x1="2016-03-22", annotation_text=f"Zoning for Quality &<br> and Affordability Initiative", annotation_position="top right",
+#                   fillcolor="black", opacity=0.9, line_width=5)
 
-    return fig_events
+#     return fig_events
 
 
 
