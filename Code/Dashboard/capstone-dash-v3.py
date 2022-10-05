@@ -1124,6 +1124,13 @@ data.dropna(inplace=True)
 data["SALE YEAR"] = data["SALE DATE"].apply(lambda x: x.year)
 data["AGE"] = data["SALE YEAR"] - data["YEAR BUILT"]
 
+### histogram of sale price
+
+sales_hist = px.histogram(data['SALE PRICE'], x="SALE PRICE", marginal="box", 
+                    opacity = 0.5, histnorm="probability density", 
+                    title="Residential Property Sales between $100K and $36M", 
+                    labels= {"SALE PRICE": "Sale Price"})
+
 # create model with residential building class category only
 
 # filter out non-residential building class categories
@@ -1563,6 +1570,9 @@ def render_page_content(pathname):
             html.P("""Our model uses property sales data from the past year (September 2021 - August 2022) in New York City. 
                     The data has numeric and categorical features describing a property's physical characteristics, location, building classifications and price. 
                     Our model predicts the price of residential properties based on these features."""),
+            html.P(
+                dcc.Graph(figure = sales_hist)
+            ),
             html.Div([
                 dbc.Row([
                     dbc.Col(
