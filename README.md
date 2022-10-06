@@ -54,9 +54,13 @@ We used a total of nine datasets in this capstone project with either informatio
 ## Visualizations
 
 ![price-events](https://github.com/nateswill/NYCHousingFinance/blob/master/images/prices_events.png)
+
 ![top3-bot3](https://github.com/nateswill/NYCHousingFinance/blob/master/images/top3bot3.png)
+
 ![rent-breakdown](https://github.com/nateswill/NYCHousingFinance/blob/master/images/rent_breakdown.png)
+
 ![rent-buy](https://github.com/nateswill/NYCHousingFinance/blob/master/images/rent_buy.png)
+
 ![machine-learn](https://github.com/nateswill/NYCHousingFinance/blob/master/images/machine_learn.png)
 
 ## Results
