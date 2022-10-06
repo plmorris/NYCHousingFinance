@@ -1252,6 +1252,11 @@ random_forest_feature_fig = px.bar(importance[0:20].sort_values("Importance"), x
             height=800, title='Random Forest Feature Importance')
 random_forest_feature_fig.update_layout(coloraxis_showscale=False)
 
+### Building Codes
+buildcode_fig = go.Figure(data=[go.Table(header=dict(values=['Building Code', 'Meaning']),
+                                        cells=dict(values=[['A0 - A9', 'B1 - B9', 'C0 - CM', 'D0 - D9', 'S0 - S9'],
+                                                          ['Single Family Dwellings', 'Two Family Dwellings', 'Walk Up Apartments', 'Elevator Apartments', 'Primarily Residential - Mixed Use']]))
+                                               ])
 
 
 ################################ Actual Styling starts below ########################################
@@ -1569,8 +1574,8 @@ def render_page_content(pathname):
             html.H1("Machine Learning: Predicting pricing trends"),
             html.P(),
             html.Ul(id = "machine learn list", children = [html.Li("""Our model uses residential property sales data from the past year (September 2021 - August 2022) in 
-                    New York City to predict property prices."""), html.Li("""The data has numeric and categorical features describing a 
-                    property's physical characteristics, location, building classifications and price."""), 
+                    New York City to predict property prices"""), html.Li("""The data has numeric and categorical features describing a 
+                    property's physical characteristics, location, building classifications and price"""), 
                     html.Li("""Random forest was the best performing model with a test score = 0.71, test RMSE = 1,102,305 and test MAE = 361,767""")]),
                    
             html.P(
@@ -1610,9 +1615,7 @@ def render_page_content(pathname):
                     html.Br(),
                     dbc.Row([
                         dbc.Col(html.Label(children='Zip Code:')),
-                        dbc.Col(dcc.Dropdown(sales_res['ZIP CODE'].unique(),
-                                            sales_res['ZIP CODE'].min(),
-                                            id='zip_code'))
+                        dbc.Col(dcc.Dropdown(id='zip_code'))
                     ]),
                     html.Br(),
                     dbc.Row([
@@ -1661,7 +1664,9 @@ def render_page_content(pathname):
             html.Br(),
             dbc.Row([dbc.Button('Input', id='submit-val', n_clicks=0, size='sm')]),
             html.Br(),
-            dbc.Row([html.Div(id='prediction output')])
+            dbc.Row([html.Div(id='prediction output')]),
+            html.Br(),
+            html.Div(dcc.Graph(figure=buildcode_fig)),
         ])
     # If the user tries to reach a different page, return a 404 message
     return dbc.Container(
@@ -1742,6 +1747,13 @@ def pick_rent_own_graph(borough_thresh):
 def pick_top_hood_graph(top_three_hoods):
     fig_top_hoods = create_top_hood_graph(top_three_hoods)
     return fig_top_hoods
+
+@app.callback(Output('zip_code', 'options'),
+            Input('neighborhood','value'))
+def update_options(selection):
+    nb_zips = sales_res[sales_res['NEIGHBORHOOD'] == selection]
+    return nb_zips['ZIP CODE'].unique()
+
 
 @app.callback(
     Output('prediction output', 'children'),
