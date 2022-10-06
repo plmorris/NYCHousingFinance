@@ -13,6 +13,7 @@ Erick Sanmartin, Peter Morris, Anthony Rondos, Nate Williamson
 
 ## Introduction
 The New York City real estate market is especially competitive, with housing costs well above expected compared to other metropolitan areas. Individuals and families alike living in the city are finding it harder and harder to keep up with the rising rent and property prices. Many New Yorkers are slowly getting pushed out from the neighborhoods they call home, and the people of the city need action by lawmakers to ease these inflated housing costs and make living in the city more sustainable for the average New Yorker.
+
 To make the necessary changes to New York’s housing situation, lawmakers and government officials must have a clear understanding of New York's historic property costs, and how that compares to today. This project seeks to use New York rental and property cost information to perform informational analysis on the real estate market, and construct a predictive model that calculates property costs in the future based on 2021 to 2022 rolling property sales data. In order to provide utilizable information to lawmakers for the purpose of creating actionable policy to alleviate the skyrocketing housing costs in New York City, this capstone will explore the following questions:
 
 1. How has the median cost of purchasing a home varied monthly in the last year?
