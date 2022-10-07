@@ -55,16 +55,16 @@ fig_events.update_layout(
         legend_title = 'Legend')
 
 fig_events.add_vrect(x0="2020-03-22", x1="2020-03-28", 
-              annotation_text="NYC Pause Program begins", annotation_position="top left",
+              annotation_text="  NYC Pause Program begins<br>& Tenant Safe Harbor Act", annotation_position="top left",
               fillcolor="black", opacity=0.9, line_width=5)
 
-fig_events.add_vrect(x0="2010-07-21",x1="2010-07-21", annotation_text="Dodd-Frank Act Passes", annotation_position="top left",
+fig_events.add_vrect(x0="2010-07-21",x1="2010-07-21", annotation_text="  Dodd-Frank Act Passes", annotation_position="top left",
               fillcolor="black", opacity=0.9, line_width=5)
 
-fig_events.add_vrect(x0="2019-06-14",x1="2019-06-14", annotation_text=f"Housing Stability &<br> Tenant Protection Act", annotation_position="top right",
+fig_events.add_vrect(x0="2019-06-14",x1="2019-06-14", annotation_text=f"Housing Stability &<br> Tenant Protection Act  ", annotation_position="top right",
               fillcolor="black", opacity=0.9, line_width=5)
 
-fig_events.add_vrect(x0="2016-03-22",x1="2016-03-22", annotation_text=f"Zoning for Quality &<br> and Affordability Initiative", annotation_position="top right",
+fig_events.add_vrect(x0="2016-03-22",x1="2016-03-22", annotation_text=f"Zoning for Quality &<br> and Affordability Initiative    ", annotation_position="top right",
               fillcolor="black", opacity=0.9, line_width=5)
 
 ###
@@ -347,35 +347,36 @@ fig_top_bkl_rent.update_yaxes(showline=True, linewidth=2, linecolor='black',
 )
 
 #queens
-fig_top_qn_rent = px.line(qn_top, x="Month/Year", y="Studio/One-Bed Median Rent", color="Neighborhood",
-    title="Top 3 and Bottom 3 Queens Neighborhoods for Rate of Rent Increase 2010(12)-2022")
-fig_top_qn_rent.update_traces(opacity=0.4)
+# qn1 = qn.copy()
+qn.rename(columns={"neighborhood": "Neighborhood"}, inplace=True)
+qn1 = qn.loc[(qn['Neighborhood']=='Corona') | ( qn['Neighborhood']=='Astoria') |
+    (qn['Neighborhood']=='Rego Park') | (qn['Neighborhood']=='Forest Hills')].copy()
+
+
+fig_top_qn_rent = px.line(qn1, x="Month/Year", y="Studio/One-Bed Median Rent", color="Neighborhood",
+    title="Top 2 and Bottom 2 Queens Neighborhoods for Rate of Rent Increase 2010-2022",line_shape='spline',
+    color_discrete_sequence=['#f8884f','#ad0826','#578bbf','#333b98'])
+fig_top_qn_rent.update_traces(line=dict(width=3))
+fig_top_qn_rent.update_traces(opacity=0.35)
 fig_top_qn_rent.update_traces(textposition="bottom right")
 fig_top_qn_rent.update_layout(yaxis_title='Studio/One-Bed Median Rent ($USD)')
+fig_top_qn_rent.update_traces(connectgaps=True)
 fig_top_qn_rent.add_trace(go.Scatter(x=['2010-01-01','2022-08-01'],
-    y=[qn_top[(qn_top['Neighborhood']=='Astoria') & (qn_top['Month/Year']=='2010-01-01')]['Studio/One-Bed Median Rent'].values[0],
-        qn_top[(qn_top['Neighborhood']=='Astoria') & (qn_top['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
-    mode='lines', name='Astoria Net Δ', line=dict(color='#9467bd')))
+    y=[qn1[(qn1['Neighborhood']=='Rego Park') & (qn1['Month/Year']=='2010-01-01')]['Studio/One-Bed Median Rent'].values[0],
+        qn1[(qn1['Neighborhood']=='Rego Park') & (qn1['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
+    mode='lines', name=' Rego Park', line=dict(color='#3a53a3',width=5)))
 fig_top_qn_rent.add_trace(go.Scatter(x=['2010-01-01','2022-08-01'],
-    y=[qn_top[(qn_top['Neighborhood']=='Corona') & (qn_top['Month/Year']=='2010-01-01')]['Studio/One-Bed Median Rent'].values[0],
-        qn_top[(qn_top['Neighborhood']=='Corona') & (qn_top['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
-    mode='lines', name='Corona Net Δ', line=dict(color='#d62728')))
-fig_top_qn_rent.add_trace(go.Scatter(x=['2012-10-01','2022-08-01'],
-    y=[qn_top[(qn_top['Neighborhood']=='Elmhurst') & (qn_top['Month/Year']=='2012-10-01')]['Studio/One-Bed Median Rent'].values[0],
-        qn_top[(qn_top['Neighborhood']=='Elmhurst') & (qn_top['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
-    mode='lines', name='Elmhurst Net Δ', line=dict(color='#2ca02c')))
+    y=[qn1[(qn1['Neighborhood']=='Forest Hills') & (qn1['Month/Year']=='2010-01-01')]['Studio/One-Bed Median Rent'].values[0],
+        qn1[(qn1['Neighborhood']=='Forest Hills') & (qn1['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
+    mode='lines', name=' Forest Hills', line=dict(color='#578bbf',width=5)))
 fig_top_qn_rent.add_trace(go.Scatter(x=['2010-01-01','2022-08-01'],
-    y=[qn_top[(qn_top['Neighborhood']=='Forest Hills') & (qn_top['Month/Year']=='2010-01-01')]['Studio/One-Bed Median Rent'].values[0],
-        qn_top[(qn_top['Neighborhood']=='Forest Hills') & (qn_top['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
-    mode='lines', name='FH Net Δ', line=dict(color='#ab63fa')))
+    y=[qn1[(qn1['Neighborhood']=='Astoria') & (qn1['Month/Year']=='2010-01-01')]['Studio/One-Bed Median Rent'].values[0],
+        qn1[(qn1['Neighborhood']=='Astoria') & (qn1['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
+    mode='lines', name=' Astoria', line=dict(color='#f8884f',width=5)))
 fig_top_qn_rent.add_trace(go.Scatter(x=['2010-01-01','2022-08-01'],
-    y=[qn_top[(qn_top['Neighborhood']=='Long Island City') & (qn_top['Month/Year']=='2010-01-01')]['Studio/One-Bed Median Rent'].values[0],
-        qn_top[(qn_top['Neighborhood']=='Long Island City') & (qn_top['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
-    mode='lines', name='LIC Net Δ', line=dict(color='#ff7f0e')))
-fig_top_qn_rent.add_trace(go.Scatter(x=['2010-01-01','2022-08-01'],
-    y=[qn_top[(qn_top['Neighborhood']=='Rego Park') & (qn_top['Month/Year']=='2010-01-01')]['Studio/One-Bed Median Rent'].values[0],
-        qn_top[(qn_top['Neighborhood']=='Rego Park') & (qn_top['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
-    mode='lines', name='RP Net Δ', line=dict(color='#17becf')))
+    y=[qn1[(qn1['Neighborhood']=='Corona') & (qn1['Month/Year']=='2010-01-01')]['Studio/One-Bed Median Rent'].values[0],
+        qn1[(qn1['Neighborhood']=='Corona') & (qn1['Month/Year']=='2022-08-01')]['Studio/One-Bed Median Rent'].values[0]],
+    mode='lines', name=' Corona', line=dict(color='#ad0826',width=5)))
 fig_top_qn_rent.update_layout({
     'plot_bgcolor': 'rgba(255,255,255,1)',
     'paper_bgcolor': 'rgba(255,255,255,1)'}
@@ -388,6 +389,12 @@ fig_top_qn_rent.update_yaxes(showline=True, linewidth=2, linecolor='black',
                      showgrid=True, gridcolor='lightgray', zeroline=True,
                     zerolinecolor='lightgray', zerolinewidth=1
 )
+labels_to_show_in_legend = [" Astoria", " Corona", " Forest Hills", " Rego Park"]
+for trace in fig_top_qn_rent['data']: 
+    if (not trace['name'] in labels_to_show_in_legend):
+        trace['showlegend'] = False
+fig_top_qn_rent.update_layout(legend={'traceorder':'reversed'})
+# fig_top_qn_rent.show()
 
 def create_top_hood_graph(borough):
     boro_dict = {
@@ -1249,7 +1256,7 @@ importance = pd.DataFrame(sorted(zip(X_train.columns,rankings),reverse=True),col
 
 random_forest_feature_fig = px.bar(importance[0:20].sort_values("Importance"), x='Importance', y='Feature',
             color='Importance', orientation='h', color_continuous_scale=px.colors.sequential.Magenta,
-            height=800, title='Random Forest Feature Importance')
+            height=800, title='Random Forest Feature Importance - Top 20 Features')
 random_forest_feature_fig.update_layout(coloraxis_showscale=False)
 
 ### Building Codes
@@ -1572,11 +1579,11 @@ def render_page_content(pathname):
     elif pathname == "/page-4/1":
         return dbc.Container([
             html.H1("Machine Learning: Predicting pricing trends"),
-            html.P(),
-            html.Ul(id = "machine learn list", children = [html.Li("""Our model uses residential property sales data from the past year (September 2021 - August 2022) in 
-                    New York City to predict property prices"""), html.Li("""The data has numeric and categorical features describing a 
-                    property's physical characteristics, location, building classifications and price"""), 
-                    html.Li("""Random forest was the best performing model with a test score = 0.71, test RMSE = 1,102,305 and test MAE = 361,767""")]),
+        
+            dcc.Markdown("""* Our model uses residential property sales data from the past year (September 2021 - August 2022) in 
+                    New York City to predict property prices"""),
+            dcc.Markdown("""* The data has numeric and categorical features describing a property's physical characteristics, location, building classifications and price"""),
+            dcc.Markdown("""* Random forest was the best performing model with an **R2 = 0.71**, test RMSE = 1,102,305 and test MAE = 361,767"""),
                    
             html.P(
                 dcc.Graph(figure = sales_hist)
